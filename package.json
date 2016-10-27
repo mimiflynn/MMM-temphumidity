@@ -1,0 +1,26 @@
+{
+  "name": "mmm-temphumidity",
+  "version": "1.0.0",
+  "description": "Magic Mirror Module for the arduino-node-temp-humidity project",
+  "main": "temphumidity.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mimiflynn/MMM-temphumidity.git"
+  },
+  "keywords": [
+    "magicmirror"
+  ],
+  "author": "Mimi Flynn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mimiflynn/MMM-temphumidity/issues"
+  },
+  "homepage": "https://github.com/mimiflynn/MMM-temphumidity#readme",
+  "dependencies": {
+    "d3": "^4.2.8",
+    "request": "^2.76.0"
+  }
+}
