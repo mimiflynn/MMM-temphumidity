@@ -15,14 +15,34 @@ const magicMirrorModule = {
   defaults: {
     text: 'Temperature and Humidity'
   },
+  clearSvg: function () {
+    var svgWrapper = document.getElementById('svg-wrapper');
+    while (svgWrapper.hasChildNodes()) {
+      svgWrapper.removeChild(node.lastChild);
+    }
+  },
+  renderSvg: function () {
+    var xmlns = 'http://www.w3.org/2000/svg';
+    var svg = document.createElementNS (xmlns, 'svg');
+        svg.setAttributeNS (null, 'width', 800);
+        svg.setAttributeNS (null, 'height', 500);
+        svg.setAttributeNS (null, 'id', 'visualization');
+        svg.style = {
+          display: 'block',
+          margin: 'auto'
+        };
+    document.getElementById('svg-wrapper').appendChild(svg);
+  },
   getData: function () {
     console.log('getData in temphumidity');
     getJSON('http://black-monolith.com:2001/api/dht/latest', (error, response, body) => {
       console.log('response', response);
+      this.clearSvg();
+      this.renderSvg();
       initChart({
         dht: response,
-        width: 500,
-        height: 300
+        width: 800,
+        height: 500
       });
     });
   },
@@ -31,18 +51,15 @@ const magicMirrorModule = {
     var title = document.createTextNode(this.config.text);
     var wrapper = document.createElement('div');
     var xmlns = 'http://www.w3.org/2000/svg';
-    var svg = document.createElementNS (xmlns, 'svg');
-        svg.setAttributeNS (null, 'width', 500);
-        svg.setAttributeNS (null, 'height', 300);
-        svg.setAttributeNS (null, 'id', 'visualization');
-        svg.style = {
-          display: 'block',
-          margin: 'auto'
-        };
+    var svgWrapper = document.createElement('div');
+
     title.className = 'bright medium light';
+    svgWrapper.id = 'svg-wrapper';
+    wrapper.height = 600;
+    wrapper.width = 500;
     header.appendChild(title);
     wrapper.appendChild(header);
-    wrapper.appendChild(svg);
+    wrapper.appendChild(svgWrapper);
 
     return wrapper;
   },
