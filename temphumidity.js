@@ -66,13 +66,16 @@ const magicMirrorModule = {
   getScripts: function () {
     return [this.file('node_modules/d3/build/d3.min.js'), this.file('graph.js')]
   },
+  scheduleUpdate: function () {
+    setInterval(() => {
+      this.getData();
+    }, 10 * 60 * 1000); // update every 10 minutes
+  },
   start: function () {
     setTimeout(() => {
       this.getData();
     }, 2000);
-    setInterval(() => {
-      this.getData();
-    }, 60005);
+    this.scheduleUpdate();
   }
 };
 
